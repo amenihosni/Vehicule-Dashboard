@@ -8,6 +8,8 @@ ApplicationWindow {
     height: 760
     title: qsTr("dashboard")
 
+    property int speed: 0
+
     Rectangle {
         anchors.fill: parent
 
@@ -41,6 +43,7 @@ ApplicationWindow {
 
         // Speed
         Image {
+            id: speedometer
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/vitesse.png"
             width: 500
             height: 400
@@ -50,88 +53,119 @@ ApplicationWindow {
             anchors.rightMargin: 100
         }
 
-       /* // Speed Needle
+        // Speed Needle
         Rectangle {
             width: 2
-            height: 120
+            height: 118
             color: "white"
-            anchors.verticalCenterOffset: 150
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenter: speedometer.verticalCenter
+             anchors.verticalCenterOffset: 50
+            anchors.horizontalCenter: speedometer.horizontalCenter
+            anchors.horizontalCenterOffset: 10 // Adjust this value to move the needle to the right
             transformOrigin: Item.Bottom
-            rotation: -90 + (speed / 100) * 180
+            rotation: -45 + (speed / 220) * 270 // Adjust rotation based on speed (0 to 220)
         }
-    }*/
 
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/warning.png"
-        width: 230
-        height: 160
-        anchors.verticalCenterOffset: 110
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 60
-    }
-
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/vehicule.png"
-        width: 500
-        height: 400
-        anchors.verticalCenterOffset: 100
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 100
-    }
-
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/temperature.png"
-        width: 600
-        height: 480
-        anchors.verticalCenterOffset: 120
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.rightMargin: -160
-    }
-
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/tmp.png"
-        width: 600
-        height: 500
-        anchors.verticalCenterOffset: 260
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: -180
-    }
-
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/fuel.png"
-        width: 550
-        height: 450
-        anchors.verticalCenterOffset: 170
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: -120
-    }
-
-    Image {
-        source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/speed2.png"
-        width: 800
-        height: 650
-        anchors.verticalCenterOffset: 130
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: -60
-    }
-
-  /*  property int speed: 0
-
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            speed = Math.min(100, speed + Math.floor(Math.random() * 10)) // Randomly increase speed, max 100 km/h
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/warning.png"
+            width: 230
+            height: 160
+            anchors.verticalCenterOffset: 110
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 60
         }
-    }*/
-}
+
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/vehicule.png"
+            width: 500
+            height: 400
+            anchors.verticalCenterOffset: 100
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 100
+        }
+
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/temperature.png"
+            width: 600
+            height: 480
+            anchors.verticalCenterOffset: 120
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.rightMargin: -160
+        }
+
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/tmp.png"
+            width: 600
+            height: 500
+            anchors.verticalCenterOffset: 260
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: -180
+        }
+
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/fuel.png"
+            width: 550
+            height: 450
+            anchors.verticalCenterOffset: 170
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: -120
+        }
+
+        Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/speed2.png"
+            width: 800
+            height: 650
+            anchors.verticalCenterOffset: 130
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: -60
+        }
+
+        // Buttons to increase and decrease speed
+        Row {
+            spacing: 40
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 100
+            anchors.horizontalCenter: speedometer.horizontalCenter
+            Button {
+                width: 30
+                height: 30
+                contentItem: Image {
+                    source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/up.png"
+                    width: 20
+                    height: 20
+                    fillMode: Image.PreserveAspectFit
+                }
+                background: Rectangle {
+                    color: "transparent"
+                }
+                onClicked: {
+                    speed = Math.min(220, speed + 10) // Increase speed by 10, max 220
+                }
+            }
+
+            Button {
+                width: 30
+                height: 30
+                contentItem: Image {
+                    source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/down.png"
+                    width: 20
+                    height: 20
+                    fillMode: Image.PreserveAspectFit
+                }
+                background: Rectangle {
+                    color: "transparent"
+                }
+                onClicked: {
+                    speed = Math.max(0, speed - 10) // Decrease speed by 10, min 0
+                }
+            }
+
+        }
+    }
 }
