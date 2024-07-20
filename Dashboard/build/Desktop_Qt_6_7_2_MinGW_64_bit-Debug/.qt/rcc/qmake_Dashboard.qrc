@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/Dashboard">
+    <file alias="qmldir">C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Dashboard/qmldir</file>
+  </qresource>
+</RCC>
+

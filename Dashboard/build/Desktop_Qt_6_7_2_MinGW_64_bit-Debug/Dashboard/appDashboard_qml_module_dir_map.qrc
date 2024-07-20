@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/Dashboard">C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Dashboard</file>
+
+  </qresource>
+</RCC>

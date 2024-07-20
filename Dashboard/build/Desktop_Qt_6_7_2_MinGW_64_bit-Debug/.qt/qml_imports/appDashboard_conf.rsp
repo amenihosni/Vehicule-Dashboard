@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/ameni/OneDrive/Documents/Dashboard
+-cmake-output
+-output-file
+C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/appDashboard_conf.cmake
+-importPath
+C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Dashboard
+-importPath
+C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.7.2/mingw_64/./qml
+-qrcFiles
+C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qmake_Dashboard.qrc
+C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/appDashboard_raw_qml_0.qrc
