@@ -9,6 +9,16 @@ ApplicationWindow {
     title: qsTr("dashboard")
 
     property int speed: 0
+    property int batteryLevel: 75 // Example battery level
+
+    Timer {
+        interval: 1000 // Update every second
+        running: true
+        repeat: true
+        onTriggered: {
+            speed = Math.min(220, speed + Math.floor(Math.random() * 10) + 1)
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -29,7 +39,6 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        // Add the current date on top of images.png
         Text {
             id: dateText
             text: Qt.formatDate(new Date(), "dddd, MMMM d, yyyy")
@@ -39,6 +48,29 @@ ApplicationWindow {
             anchors.top: mainImage.top
             anchors.topMargin: 90
             z: 1
+        }
+
+        // Time Display
+        Timer {
+            id: timeTimer
+            interval: 1000 // Update every second
+            running: true
+            repeat: true
+            onTriggered: {
+                currentTime.text = Qt.formatDateTime(new Date(), "hh:mm")
+            }
+        }
+
+        Text {
+            id: currentTime
+            text: Qt.formatDateTime(new Date(), "hh:mm")
+            font.pixelSize: 18
+            font.family: "Inter"
+            font.bold: Font.DemiBold
+            color: "#FFFFFF"
+            anchors.top: parent.top
+            anchors.topMargin: 360
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         // Speed
@@ -59,11 +91,11 @@ ApplicationWindow {
             height: 118
             color: "white"
             anchors.verticalCenter: speedometer.verticalCenter
-             anchors.verticalCenterOffset: 50
+            anchors.verticalCenterOffset: 50
             anchors.horizontalCenter: speedometer.horizontalCenter
-            anchors.horizontalCenterOffset: 10 // Adjust this value to move the needle to the right
+            anchors.horizontalCenterOffset: 10
             transformOrigin: Item.Bottom
-            rotation: -45 + (speed / 220) * 270 // Adjust rotation based on speed (0 to 220)
+            rotation: -45 + (speed / 220) * 270
         }
 
         Image {
@@ -126,6 +158,41 @@ ApplicationWindow {
             anchors.leftMargin: -60
         }
 
+        // Battery State (Moved to top)
+        Item {
+            width: 50
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 380
+            anchors.right: parent.right
+            anchors.rightMargin: 30
+
+            // Empty Battery Icon
+            Image {
+                source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/empty-battery.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+
+            // Battery Level
+            Rectangle {
+                width: parent.width * (batteryLevel / 100)
+                height: parent.height * 0.8 // Slightly smaller than the icon
+                color: batteryLevel > 20 ? "green" : "red"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                radius: 2
+            }
+
+            // Battery Text
+            Text {
+                text: qsTr("%1%").arg(batteryLevel)
+                font.pointSize: 12
+                color: "white"
+                anchors.centerIn: parent
+            }
+        }
+
         // Buttons to increase and decrease speed
         Row {
             spacing: 40
@@ -145,7 +212,7 @@ ApplicationWindow {
                     color: "transparent"
                 }
                 onClicked: {
-                    speed = Math.min(220, speed + 10) // Increase speed by 10, max 220
+                    speed = Math.min(220, speed + 10)
                 }
             }
 
@@ -162,10 +229,9 @@ ApplicationWindow {
                     color: "transparent"
                 }
                 onClicked: {
-                    speed = Math.max(0, speed - 10) // Decrease speed by 10, min 0
+                    speed = Math.max(0, speed - 10)
                 }
             }
-
         }
     }
 }
