@@ -15,6 +15,7 @@ ApplicationWindow {
     property bool turningRight: false
     property bool leftSignalOn: false
     property bool rightSignalOn: false
+    property string currentTemperature: "Loading..."
 
     Timer {
         interval: 1000 // Update every second
@@ -84,6 +85,19 @@ ApplicationWindow {
             color: "#FFFFFF"
             anchors.top: parent.top
             anchors.topMargin: 360
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        // Current Temperature
+        Text {
+            id: temperatureText
+            text: currentTemperature
+            font.pixelSize: 18
+            font.family: "Inter"
+            font.bold: Font.DemiBold
+            color: "#FFFFFF"
+            anchors.top: currentTime.bottom
+            anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -282,5 +296,24 @@ ApplicationWindow {
                 }
             }
         }
-    }
-}
+
+        Component.onCompleted: {
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Tunis,TN&appid=298c05dbc976e323a775a89d3e1bc7f5&units=metric", true);
+            request.onload = function() {
+                if (request.status >= 200 && request.status < 400) {
+                    var response = JSON.parse(request.responseText);
+                    currentTemperature = qsTr("%1°C").arg(response.main.temp);
+                } else {
+                    console.error("Error fetching data:", request.status, request.statusText);
+                    currentTemperature = "Error fetching data";
+                }
+            };
+            request.onerror = function() {
+                console.error("Network error occurred");
+                currentTemperature = "Error fetching data";
+            };
+            request.send();
+        }}}
+
+
