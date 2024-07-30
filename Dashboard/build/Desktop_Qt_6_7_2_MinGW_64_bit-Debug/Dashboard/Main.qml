@@ -9,7 +9,12 @@ ApplicationWindow {
     title: qsTr("dashboard")
 
     property int speed: 0
-    property int batteryLevel: 75 // Example battery level
+    property int batteryLevel: 75
+    property int engineTemperature: 0
+    property bool turningLeft: false
+    property bool turningRight: false
+    property bool leftSignalOn: false
+    property bool rightSignalOn: false
 
     Timer {
         interval: 1000 // Update every second
@@ -17,6 +22,15 @@ ApplicationWindow {
         repeat: true
         onTriggered: {
             speed = Math.min(220, speed + Math.floor(Math.random() * 10) + 1)
+            engineTemperature = Math.min(120, engineTemperature + Math.floor(Math.random() * 3) + 1)
+
+            // Toggle turn signals for demonstration
+            if (turningLeft) {
+                leftSignalOn = !leftSignalOn
+            }
+            if (turningRight) {
+                rightSignalOn = !rightSignalOn
+            }
         }
     }
 
@@ -31,7 +45,7 @@ ApplicationWindow {
 
         Image {
             id: mainImage
-            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/images.png"
+            source: "file:///mnt/data/image.png"
             width: 500
             height: 400
             anchors.horizontalCenter: parent.horizontalCenter
@@ -128,6 +142,20 @@ ApplicationWindow {
             anchors.rightMargin: -160
         }
 
+        // Engine Temperature Needle
+        Rectangle {
+            width: 2
+            height: 118
+            color: "white"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: 164
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenterOffset: -100
+            anchors.leftMargin: 180
+            transformOrigin: Item.Bottom
+            rotation: -45 + (engineTemperature / 120) * 270
+        }
+
         Image {
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/tmp.png"
             width: 600
@@ -193,43 +221,64 @@ ApplicationWindow {
             }
         }
 
-        // Buttons to increase and decrease speed
-        Row {
-            spacing: 40
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 100
-            anchors.horizontalCenter: speedometer.horizontalCenter
-            Button {
-                width: 30
-                height: 30
-                contentItem: Image {
-                    source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/up.png"
-                    width: 20
-                    height: 20
-                    fillMode: Image.PreserveAspectFit
-                }
-                background: Rectangle {
-                    color: "transparent"
-                }
-                onClicked: {
-                    speed = Math.min(220, speed + 10)
+        // Left Turn Signal (Arrow)
+        Item {
+            id: leftTurnSignal
+            width: 50
+            height: 50
+            visible: turningLeft || turningRight
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            anchors.top: parent.top
+            anchors.topMargin: 20
+
+            Canvas {
+                anchors.fill: parent
+                onPaint: {
+                    var ctx = getContext("2d")
+                    ctx.clearRect(0, 0, width, height)
+                    ctx.fillStyle = leftSignalOn ? "green" : "red"
+                    ctx.beginPath()
+                    ctx.moveTo(10, 25)
+                    ctx.lineTo(30, 10)
+                    ctx.lineTo(30, 20)
+                    ctx.lineTo(40, 20)
+                    ctx.lineTo(40, 30)
+                    ctx.lineTo(30, 30)
+                    ctx.lineTo(30, 40)
+                    ctx.closePath()
+                    ctx.fill()
                 }
             }
+        }
 
-            Button {
-                width: 30
-                height: 30
-                contentItem: Image {
-                    source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/down.png"
-                    width: 20
-                    height: 20
-                    fillMode: Image.PreserveAspectFit
-                }
-                background: Rectangle {
-                    color: "transparent"
-                }
-                onClicked: {
-                    speed = Math.max(0, speed - 10)
+        // Right Turn Signal (Arrow)
+        Item {
+            id: rightTurnSignal
+            width: 50
+            height: 50
+            visible: turningLeft || turningRight
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.top: parent.top
+            anchors.topMargin: 20
+
+            Canvas {
+                anchors.fill: parent
+                onPaint: {
+                    var ctx = getContext("2d")
+                    ctx.clearRect(0, 0, width, height)
+                    ctx.fillStyle = rightSignalOn ? "green" : "red"
+                    ctx.beginPath()
+                    ctx.moveTo(40, 25)
+                    ctx.lineTo(20, 10)
+                    ctx.lineTo(20, 20)
+                    ctx.lineTo(10, 20)
+                    ctx.lineTo(10, 30)
+                    ctx.lineTo(20, 30)
+                    ctx.lineTo(20, 40)
+                    ctx.closePath()
+                    ctx.fill()
                 }
             }
         }
