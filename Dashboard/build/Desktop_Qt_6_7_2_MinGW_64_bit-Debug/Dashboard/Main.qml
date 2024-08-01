@@ -92,13 +92,14 @@ ApplicationWindow {
         Text {
             id: temperatureText
             text: currentTemperature
-            font.pixelSize: 18
+            font.pixelSize: 17
             font.family: "Inter"
             font.bold: Font.DemiBold
             color: "#FFFFFF"
             anchors.top: currentTime.bottom
             anchors.topMargin: 20
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 50
         }
 
         // Speed
@@ -235,67 +236,6 @@ ApplicationWindow {
             }
         }
 
-        // Left Turn Signal (Arrow)
-        Item {
-            id: leftTurnSignal
-            width: 50
-            height: 50
-            visible: turningLeft || turningRight
-            anchors.left: parent.left
-            anchors.leftMargin: 20
-            anchors.top: parent.top
-            anchors.topMargin: 20
-
-            Canvas {
-                anchors.fill: parent
-                onPaint: {
-                    var ctx = getContext("2d")
-                    ctx.clearRect(0, 0, width, height)
-                    ctx.fillStyle = leftSignalOn ? "green" : "red"
-                    ctx.beginPath()
-                    ctx.moveTo(10, 25)
-                    ctx.lineTo(30, 10)
-                    ctx.lineTo(30, 20)
-                    ctx.lineTo(40, 20)
-                    ctx.lineTo(40, 30)
-                    ctx.lineTo(30, 30)
-                    ctx.lineTo(30, 40)
-                    ctx.closePath()
-                    ctx.fill()
-                }
-            }
-        }
-
-        // Right Turn Signal (Arrow)
-        Item {
-            id: rightTurnSignal
-            width: 50
-            height: 50
-            visible: turningLeft || turningRight
-            anchors.right: parent.right
-            anchors.rightMargin: 20
-            anchors.top: parent.top
-            anchors.topMargin: 20
-
-            Canvas {
-                anchors.fill: parent
-                onPaint: {
-                    var ctx = getContext("2d")
-                    ctx.clearRect(0, 0, width, height)
-                    ctx.fillStyle = rightSignalOn ? "green" : "red"
-                    ctx.beginPath()
-                    ctx.moveTo(40, 25)
-                    ctx.lineTo(20, 10)
-                    ctx.lineTo(20, 20)
-                    ctx.lineTo(10, 20)
-                    ctx.lineTo(10, 30)
-                    ctx.lineTo(20, 30)
-                    ctx.lineTo(20, 40)
-                    ctx.closePath()
-                    ctx.fill()
-                }
-            }
-        }
 
         Component.onCompleted: {
             var request = new XMLHttpRequest();
@@ -314,6 +254,6 @@ ApplicationWindow {
                 currentTemperature = "Error fetching data";
             };
             request.send();
-        }}}
-
-
+        }
+    }
+}
