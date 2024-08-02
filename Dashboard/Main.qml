@@ -11,6 +11,7 @@ ApplicationWindow {
     property int speed: 0
     property int batteryLevel: 75
     property int engineTemperature: 0
+    property int fuelLevel: 50
     property bool turningLeft: false
     property bool turningRight: false
     property bool leftSignalOn: false
@@ -18,14 +19,14 @@ ApplicationWindow {
     property string currentTemperature: "Loading..."
 
     Timer {
-        interval: 1000 // Update every second
+        interval: 1000
         running: true
         repeat: true
         onTriggered: {
             speed = Math.min(220, speed + Math.floor(Math.random() * 10) + 1)
             engineTemperature = Math.min(120, engineTemperature + Math.floor(Math.random() * 3) + 1)
+            fuelLevel = Math.max(0, fuelLevel - Math.floor(Math.random() * 2))
 
-            // Toggle turn signals for demonstration
             if (turningLeft) {
                 leftSignalOn = !leftSignalOn
             }
@@ -124,7 +125,7 @@ ApplicationWindow {
             anchors.horizontalCenter: speedometer.horizontalCenter
             anchors.horizontalCenterOffset: 10
             transformOrigin: Item.Bottom
-            rotation: -45 + (speed / 220) * 270
+            rotation: -70 + ((speed - 20) / 200) * 170
         }
 
         Image {
@@ -156,20 +157,17 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.rightMargin: -160
         }
-
-        // Engine Temperature Needle
         Rectangle {
             width: 2
-            height: 118
+            height: 67
             color: "white"
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 164
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.horizontalCenterOffset: -100
-            anchors.leftMargin: 180
+            anchors.verticalCenterOffset: 190
+            anchors.left: parent.left
+            anchors.leftMargin: 140
             transformOrigin: Item.Bottom
-            rotation: -45 + (engineTemperature / 120) * 270
-        }
+            rotation: -90 + (engineTemperature / 120) * 90
+              }
 
         Image {
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/tmp.png"
@@ -189,6 +187,21 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: -120
+
+        }
+
+        // Fuel Needle
+        Rectangle {
+            width: 2
+            height: 63
+            color: "white"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: 184
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenterOffset: 328
+            anchors.rightMargin: 180
+            transformOrigin: Item.Bottom
+            rotation: -45 + (fuelLevel / 100) * 270
         }
 
         Image {
@@ -235,7 +248,6 @@ ApplicationWindow {
                 anchors.centerIn: parent
             }
         }
-
 
         Component.onCompleted: {
             var request = new XMLHttpRequest();
