@@ -128,6 +128,18 @@ ApplicationWindow {
             rotation: -70 + ((speed - 20) / 200) * 170
         }
 
+        // Speed Value Text
+        Text {
+            text: speed
+            font.pixelSize: 18
+                        color: "white"
+                        anchors.horizontalCenter: speedometer.horizontalCenter
+                        anchors.verticalCenter: speedometer.verticalCenter
+                        anchors.verticalCenterOffset: 55
+                        anchors.horizontalCenterOffset: -30
+                        z: 2
+        }
+
         Image {
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/warning.png"
             width: 230
