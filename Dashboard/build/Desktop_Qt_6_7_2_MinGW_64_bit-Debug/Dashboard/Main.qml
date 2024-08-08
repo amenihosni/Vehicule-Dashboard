@@ -24,7 +24,7 @@ ApplicationWindow {
         id: dashboardLoader
         anchors.fill: parent
         visible: false
-        source: "dashboard.qml" // Set the source to dashboard.qml
+        source: "dashboard.qml"
         onStatusChanged: {
             if (status === Loader.Error) {
                 console.error("Failed to load dashboard.qml: ", dashboardLoader.status);
@@ -44,12 +44,12 @@ ApplicationWindow {
 
     Timer {
         id: splashTimer
-        interval: 3000 // Adjust timing as needed
+        interval: 3000
         running: true
         repeat: false
         onTriggered: {
-            splashLoader.visible = false; // Hide splashLoader
-            dashboardLoader.visible = true; // Show dashboardLoader
+            splashLoader.visible = false;
+            dashboardLoader.visible = true;
         }
     }
 }

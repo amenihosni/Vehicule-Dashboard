@@ -110,7 +110,6 @@ Item {
             z: 1
         }
 
-
         Image {
             id: speedometer
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/vitesse.png"
@@ -287,6 +286,23 @@ Item {
                 color: "transparent"
                 border.color: "transparent"
             }
+        }
+
+        Button {
+            id: mapButton
+            text: "Open Map"
+            anchors.bottom: cameraButton.top
+            anchors.bottomMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+
+                mapViewLoader.source = "MapView.qml"
+            }
+        }
+
+        Loader {
+            id: mapViewLoader
+            anchors.fill: parent
         }
 
         Component.onCompleted: {
