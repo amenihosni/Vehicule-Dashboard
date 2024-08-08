@@ -100,6 +100,18 @@ Item {
         }
 
         Image {
+            source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/cloud.png"
+            width: 21
+            height: 22
+            anchors.top: temperatureText.bottom
+            anchors.topMargin: -17
+            anchors.left: temperatureText.left
+            anchors.leftMargin: -30
+            z: 1
+        }
+
+
+        Image {
             id: speedometer
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/vitesse.png"
             width: 500

@@ -1,65 +1,53 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtLocation 5.15
-import QtPositioning 5.15
 
-ApplicationWindow {
-    visible: true
+Item {
+    id: splash
     width: 950
     height: 760
-    title: qsTr("Car Map")
 
-    StackView {
-        id: stackView
+    Rectangle {
         anchors.fill: parent
-        initialItem: mainPage
-    }
+        color: "black"
 
-    Item {
-        id: mainPage
-        width: parent.width
-        height: parent.height
-
-        Button {
-            text: "Open Map"
+        Column {
+            id: splashContent
             anchors.centerIn: parent
-            onClicked: {
-                stackView.push(mapPage) // Navigate to the map view
+            spacing: 30
+
+            Text {
+                id: splashText
+                text: "Bienvenue"
+                color: "white"
+                font.pixelSize: 30
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Image {
+                id: logo
+                source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/logo.png"
+                width: 355
+                height: 100
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            Text {
+                id: loadingText
+                text: "Loading..."
+                color: "grey"
+                font.pixelSize: 20
+                horizontalAlignment: Text.AlignHCenter
             }
         }
 
-        Button {
-            text: "Back to Dashboard"
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                stackView.pop() // Go back to the previous page
-            }
-        }
-    }
-
-    Item {
-        id: mapPage
-        width: parent.width
-        height: parent.height
-
-        Map {
-            id: map
-            anchors.fill: parent
-            plugin: Plugin {
-                name: "esri" // You can use different plugins like "osm" or "mapbox" depending on your needs
-            }
-            center: QtPositioning.coordinate(37.7749, -122.4194) // Example coordinates
-            zoomLevel: 12
-        }
-
-        Button {
-            text: "Back"
-            anchors.top: parent.top
-            anchors.left: parent.left
-            onClicked: {
-                stackView.pop() // Return to the previous page
+        Timer {
+            id: splashTimer
+            interval: 3000
+            running: true
+            repeat: false
+            onTriggered: {
+                splash.visible = false
+                dashboardLoader.source = "dashboard.qml"
             }
         }
     }
