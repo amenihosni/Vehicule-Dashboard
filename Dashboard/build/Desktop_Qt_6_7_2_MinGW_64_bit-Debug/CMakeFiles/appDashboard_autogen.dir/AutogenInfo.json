@@ -787,15 +787,7 @@
 	"CROSS_CONFIG" : false,
 	"DEP_FILE" : "C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appDashboard_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "appDashboard_autogen/timestamp",
-	"HEADERS" : 
-	[
-		[
-			"C:/Users/ameni/OneDrive/Documents/Dashboard/cameraopener.h",
-			"MU",
-			"EWIEGA46WW/moc_cameraopener.cpp",
-			null
-		]
-	],
+	"HEADERS" : [],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appDashboard_autogen/include",
 	"MOC_COMPILATION_FILE" : "C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appDashboard_autogen/mocs_compilation.cpp",
@@ -895,11 +887,6 @@
 	"SETTINGS_FILE" : "C:/Users/ameni/OneDrive/Documents/Dashboard/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appDashboard_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[
-			"C:/Users/ameni/OneDrive/Documents/Dashboard/cameraopener.cpp",
-			"MU",
-			null
-		],
 		[ "C:/Users/ameni/OneDrive/Documents/Dashboard/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
