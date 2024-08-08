@@ -20,6 +20,8 @@ qt_add_qml_module(appDashboard
         SOURCES cameraopener.h
         SOURCES cameraopener.cpp
 QML_FILES MapView.qml
+QML_FILES Screen.qml
+QML_FILES dashboard.qml
 
 )
 

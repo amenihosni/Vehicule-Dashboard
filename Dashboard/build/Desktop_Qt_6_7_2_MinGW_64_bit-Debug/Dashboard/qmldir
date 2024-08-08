@@ -3,4 +3,5 @@ typeinfo appDashboard.qmltypes
 prefer :/Dashboard/
 Main 1.0 Main.qml
 MapView 1.0 MapView.qml
+Screen 1.0 Screen.qml
 
