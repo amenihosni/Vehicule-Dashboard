@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="/Dashboard/">
     <file alias="Main.qml">C:/Users/ameni/OneDrive/Documents/Dashboard/Main.qml</file>
+    <file alias="MapView.qml">C:/Users/ameni/OneDrive/Documents/Dashboard/MapView.qml</file>
   </qresource>
 </RCC>
 

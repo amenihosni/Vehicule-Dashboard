@@ -132,12 +132,12 @@ ApplicationWindow {
         Text {
             text: speed
             font.pixelSize: 18
-                        color: "white"
-                        anchors.horizontalCenter: speedometer.horizontalCenter
-                        anchors.verticalCenter: speedometer.verticalCenter
-                        anchors.verticalCenterOffset: 55
-                        anchors.horizontalCenterOffset: -30
-                        z: 2
+            color: "white"
+            anchors.horizontalCenter: speedometer.horizontalCenter
+            anchors.verticalCenter: speedometer.verticalCenter
+            anchors.verticalCenterOffset: 55
+            anchors.horizontalCenterOffset: -30
+            z: 2
         }
 
         Image {
@@ -169,6 +169,8 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.rightMargin: -160
         }
+
+        // Engine Temperature Needle
         Rectangle {
             width: 2
             height: 67
@@ -179,7 +181,7 @@ ApplicationWindow {
             anchors.leftMargin: 140
             transformOrigin: Item.Bottom
             rotation: -90 + (engineTemperature / 120) * 90
-              }
+        }
 
         Image {
             source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/tmp.png"
@@ -199,7 +201,6 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: -120
-
         }
 
         // Fuel Needle
@@ -261,13 +262,43 @@ ApplicationWindow {
             }
         }
 
+        // Tachometer Needle
+        Rectangle {
+            width: 2
+            height: 110
+            color: "white"
+            anchors.verticalCenter: speedometer.verticalCenter
+            anchors.verticalCenterOffset: 58
+            anchors.horizontalCenter: speedometer.horizontalCenter
+            anchors.horizontalCenterOffset: -280 // Adjusted offset to move the needle closer to the left
+            transformOrigin: Item.Bottom
+            rotation: -45 + ((engineTemperature / 120) * 90) // Adjust formula to match tachometer values
+        }
+
+
+        Button {
+            id: cameraButton
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 40
+            height: 40
+            icon.source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/camera.png"
+            onClicked: {
+                cameraOpener.openCamera()
+            }
+            background: Rectangle {
+                color: "transparent"
+                border.color: "transparent"
+            }
+        }
+
         Component.onCompleted: {
             var request = new XMLHttpRequest();
             request.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Tunis,TN&appid=298c05dbc976e323a775a89d3e1bc7f5&units=metric", true);
             request.onload = function() {
                 if (request.status >= 200 && request.status < 400) {
                     var response = JSON.parse(request.responseText);
-                    currentTemperature = qsTr("%1°C").arg(response.main.temp);
+                    currentTemperature = qsTr("%1°C").arg(Math.floor(response.main.temp)); // Remove decimal point
                 } else {
                     console.error("Error fetching data:", request.status, request.statusText);
                     currentTemperature = "Error fetching data";

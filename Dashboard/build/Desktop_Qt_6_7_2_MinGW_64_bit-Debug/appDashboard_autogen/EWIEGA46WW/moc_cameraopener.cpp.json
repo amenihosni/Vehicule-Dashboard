@@ -1,0 +1,24 @@
+{
+    "classes": [
+        {
+            "className": "CameraOpener",
+            "object": true,
+            "qualifiedClassName": "CameraOpener",
+            "slots": [
+                {
+                    "access": "public",
+                    "name": "openCamera",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "cameraopener.h",
+    "outputRevision": 68
+}
