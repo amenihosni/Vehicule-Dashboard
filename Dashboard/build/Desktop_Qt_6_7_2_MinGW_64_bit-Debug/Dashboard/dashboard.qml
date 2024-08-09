@@ -269,7 +269,7 @@ Item {
             anchors.horizontalCenter: speedometer.horizontalCenter
             anchors.horizontalCenterOffset: -280
             transformOrigin: Item.Bottom
-            rotation: -45 + ((engineTemperature / 120) * 90)
+            rotation: -95 + ((engineTemperature / 120) * 90)
         }
 
         Button {
@@ -292,7 +292,8 @@ Item {
             id: mapButton
             anchors.bottom: cameraButton.top
             anchors.bottomMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 10 // Adjust as needed to control the distance from the right edge
             background: Rectangle {
                 color: "transparent"
                 border.color: "transparent"
@@ -327,6 +328,7 @@ Item {
             id: mapViewLoader
             anchors.fill: parent
         }
+
 
 
         Component.onCompleted: {
