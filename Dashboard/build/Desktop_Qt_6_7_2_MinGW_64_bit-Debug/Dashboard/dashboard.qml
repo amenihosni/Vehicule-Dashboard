@@ -290,12 +290,35 @@ Item {
 
         Button {
             id: mapButton
-            text: "Open Map"
             anchors.bottom: cameraButton.top
             anchors.bottomMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
+            background: Rectangle {
+                color: "transparent"
+                border.color: "transparent"
+                implicitWidth: mapContent.implicitWidth
+                implicitHeight: mapContent.implicitHeight
+            }
+            contentItem: Row {
+                id: mapContent
+                spacing: 5
+                anchors.centerIn: parent
 
+                Image {
+                    id: mapIcon
+                    source: "file:///C:/Users/ameni/OneDrive/Documents/Dashboard/google-maps.png"
+                    width: 24
+                    height: 24
+                }
+
+                Text {
+                    text: "Map"
+                    color: "white" // Adjust text color as needed
+                    font.pixelSize: 16
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            onClicked: {
                 mapViewLoader.source = "MapView.qml"
             }
         }
@@ -304,6 +327,7 @@ Item {
             id: mapViewLoader
             anchors.fill: parent
         }
+
 
         Component.onCompleted: {
             var request = new XMLHttpRequest();
